@@ -1,0 +1,5 @@
+<section>
+    <div class="grid">
+        <cell *ngFor="let cell of cells; let i = index" [value]="cell" (click)="changeCellValues(i)"></cell>
+    </div>
+</section>
