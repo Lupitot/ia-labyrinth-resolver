@@ -18,4 +18,21 @@ export class CellComponent {
     this.currentValue = this.value;
     console.log('changeValue', this.currentValue);
   }
+
+  changeBackground(index: number) {
+    if(index === 1) {
+      return 'blue';
+    } else if(index === 2) {
+      return 'green';
+    } else if(index === 3){
+      return 'red';
+    } else if(index === 4){
+      return 'yellow';
+    } else if(index === 5){
+      return 'purple';
+    } else {
+      return 'white';
+    }
+  }
+
 }

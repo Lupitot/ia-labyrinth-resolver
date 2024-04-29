@@ -22,7 +22,8 @@ export class GridComponent {
     this.cells[index] = this.currentValue;
   }
   
-
-
-
+  resetGrid() {
+    this.cells = Array(100).fill(0);
+  }
+  
 }
