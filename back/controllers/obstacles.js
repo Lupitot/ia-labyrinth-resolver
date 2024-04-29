@@ -1,7 +1,7 @@
 const Obstacle = require('../models/obstacles');
 const logger = require('../logger');
 console.log('test4');
-exports.createCampagne = (req, res) => {
+exports.createObstacle = (req, res) => {
     let obstacles = new Obstacle({
         name: req.body.name,
         traversable: req.body.traversable,
