@@ -13,4 +13,4 @@ const Level = mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('DandD', Level);     
+module.exports = mongoose.model('Level', Level);     

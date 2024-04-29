@@ -14,4 +14,4 @@ const Obstacle = mongoose.Schema({
     active: {type:Boolean, required: true},
 });
 
-module.exports = mongoose.model('DandD', Obstacle);     
+module.exports = mongoose.model('Obstacle', Obstacle);     

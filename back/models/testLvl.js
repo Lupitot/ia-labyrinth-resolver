@@ -11,4 +11,4 @@ const TestLvl = mongoose.Schema({
     active: {type:Boolean, required: true},
 });
 
-module.exports = mongoose.model('DandD', TestLvl);     
+module.exports = mongoose.model('TestLvl', TestLvl);     
