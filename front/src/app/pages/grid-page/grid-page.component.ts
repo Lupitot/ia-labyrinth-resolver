@@ -13,7 +13,6 @@ import { ValueSelctorComponent} from '../../components/value-selctor/value-selct
   styleUrl: './grid-page.component.css'
 })
 export class GridPageComponent {
-
   currentValue!: number;
 
 
@@ -22,7 +21,4 @@ export class GridPageComponent {
     this.currentValue = value;
     console.log('currentValueSelectedPAGE2', this.currentValue);
   }
-
-
-
 }
