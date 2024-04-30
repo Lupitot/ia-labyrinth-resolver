@@ -1,0 +1,12 @@
+<div>
+    <div class="contentInput">
+        <h1>Sign Up</h1>
+        <form (submit)="submitForm()">
+        <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+        <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+  
