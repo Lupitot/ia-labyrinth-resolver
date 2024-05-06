@@ -1,5 +1,8 @@
 <section>
-  <input type="text" placeholder="name" />
+  <form (submit)="submitForm()">
+    <input type="text" placeholder="name" [(ngModel)]="name" name="name" required/>
+    <button type="submit">Submit</button>
+  </form>
   <div class="grid">
     <div class="row" *ngFor="let row of cells; let i = index">
       <div
@@ -7,9 +10,7 @@
         *ngFor="let cell of row; let j = index"
         (click)="changeCellValues(i, j)"
         [style.background-color]="changeBackground(i, j)"
-      >
-        {{ cell }}
-      </div>
+      ></div>
     </div>
   </div>
   <button (click)="resetGrid()">Reset</button>

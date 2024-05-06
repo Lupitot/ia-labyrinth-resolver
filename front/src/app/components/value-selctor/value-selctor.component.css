@@ -1,0 +1,32 @@
+.btn0 {
+    background-color: white;
+}
+
+.btn1 {
+    background-color: #3844c8;
+}
+
+.btn2 {
+    background-color: #20a33e;
+}
+
+.btn3 {
+    background-color: #e6eb4d;
+}
+
+.btn4 {
+    background-color: #df5138;
+}
+
+.btn5 {
+    background-color: #272829;
+}
+
+.btn0, .btn1, .btn2, .btn3, .btn4, .btn5 {
+    border: 1px solid rgb(0, 0, 0);
+    margin: 5px;
+    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}

@@ -9,6 +9,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   {
     path: '**',
-    redirectTo: '/Grid',
+    redirectTo: '/login',
   },
 ];
