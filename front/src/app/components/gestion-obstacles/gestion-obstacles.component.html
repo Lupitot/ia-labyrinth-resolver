@@ -1,0 +1,22 @@
+<div>
+    <div class="contentInput">
+        <h1>Create Obstacle</h1>
+        <form (submit)="submitForm()">
+        <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
+
+        <label for="traversable">Traversable:</label><br>
+        <input type="radio" id="traversable" name="traversable" [(ngModel)]="traversable" value="true">
+        <label for="true">Oui</label><br>
+        <input type="radio" id="traversable" name="traversable" [(ngModel)]="traversable" value="false">
+        <label for="false">Non</label><br>
+
+        <input type="text" placeholder="effect" [(ngModel)]="effect" name="effect" required />
+        <input type="color" id="appearance" name="appearance" [(ngModel)]="appearance" required>
+        <input type="number" placeholder="0" [(ngModel)]="min" name="min" required />
+        <input type="number" placeholder="0" [(ngModel)]="max" name="max" required />
+        <button type="submit">
+            validé</button>
+        </form>
+    </div>
+</div>
+  

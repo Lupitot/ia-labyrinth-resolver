@@ -13,8 +13,9 @@ exports.createObstacle = (req, res) => {
         modificationDate: new Date(),
         active: true
     });
-
+    console.log(obstacles);
     obstacles.save().then((savedObstacles) => {
+        console.log(savedObstacles);
         res.status(200).json({ "message": "Création d'un obstacl bien réalisée", "obstacle": savedObstacles });
         logger.info({ message: savedObstacles.name + ' bien créé'});
     }).catch((err) => {

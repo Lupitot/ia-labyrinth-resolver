@@ -10,7 +10,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class ValueSelctorComponent {
 
   @Output() selelctedValue = new EventEmitter<number>();
-
+  // output appaence par get 
 
   currentValue = 0;
 
