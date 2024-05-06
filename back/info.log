@@ -1,0 +1,10 @@
+2024-05-06T11:18:33.041Z : Erreur lors de la recherche de l'utilisateur : TypeError: Cannot read properties of null (reading 'status')
+2024-05-06T11:22:49.217Z : Erreur lors de la recherche de l'utilisateur : TypeError: Cannot read properties of null (reading 'status')
+2024-05-06T11:27:42.523Z : Erreur lors de la recherche de l'utilisateur : TypeError: Cannot read properties of null (reading 'status')
+2024-05-06T11:31:13.378Z : Erreur lors de la recherche de l'utilisateur : TypeError: Cannot read properties of null (reading 'status')
+2024-05-06T11:32:55.430Z : un Admin fait une requête
+2024-05-06T11:32:55.546Z : test de correction de bug/autorisation  bien créé
+2024-05-06T11:34:09.607Z : testid fait une requête
+2024-05-06T11:34:09.608Z : Création de level non autorisée
+2024-05-06T11:34:48.935Z : testid fait une requête
+2024-05-06T11:34:48.935Z : Création de level non autorisée

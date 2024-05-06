@@ -9,8 +9,6 @@ exports.createTestLvl = (req, res) => {
         result: req.body.result,
         creationDate: new Date(),
         modificationDate: new Date(),
-        creationUser: 'admin',
-        modificationUser: 'admin',
         active: true
     });
     

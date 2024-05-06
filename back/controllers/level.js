@@ -3,17 +3,19 @@ const logger = require('../logger');
 console.log('test4');
 
 exports.createLevel = (req, res) => {
+    if(!req.isAdmin){
+        logger.error({ message: 'Création de level non autorisée'});
+        res.status(403).json({ "message": "UNAUTHORIZED" });
+        return;
+    }
     let level = new Level({
         name: req.body.name,
         creator: req.body.creator,
         composition: req.body.composition,
         creationDate: new Date(),
         modificationDate: new Date(),
-        creationUser: 'admin',
-        modificationUser: 'admin',
         active: true
     });
-    
     level.save().then((savedLevel) => {
         res.status(200).json({ "message": "Création du level bien réalisée", "level": savedLevel});
         logger.info({ message: savedLevel.name + ' bien créé'});

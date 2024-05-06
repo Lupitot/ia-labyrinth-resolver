@@ -1,4 +1,5 @@
 const winston = require('winston');
+const users = require('../models/users');
 
 const logger = (req, res, next) => { // next() sert à passer le relai aux autres middlewares et fonctions.
     try {
@@ -9,8 +10,6 @@ const logger = (req, res, next) => { // next() sert à passer le relai aux autre
                 new winston.transports.Console(),
             ]
         });
-
-
         log.info("MIDDLEWARE");
         next();
     } catch {

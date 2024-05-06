@@ -11,8 +11,6 @@ exports.createObstacle = (req, res) => {
         max: req.body.max,
         creationDate: new Date(),
         modificationDate: new Date(),
-        creationUser: 'admin',
-        modificationUser: 'admin',
         active: true
     });
 

@@ -9,8 +9,6 @@ const Obstacle = mongoose.Schema({
     max: {type:Number, required: false},
     creationDate: {type:Date, required: true},
     modificationDate: {type:Date, required: true},
-    creationUser: {type:String, required: true},
-    modificationUser: {type:String, required: true},
     active: {type:Boolean, required: true},
 });
 
