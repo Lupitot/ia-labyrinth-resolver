@@ -3,13 +3,9 @@
         {{currentValue}}
     </h2>
     <ul>
-        <li>
-            <button (click)="selectValue(0)" class="btn0"></button>
-            <button (click)="selectValue(1)" class="btn1"></button>
-            <button (click)="selectValue(2)" class="btn2"></button>
-            <button (click)="selectValue(3)" class="btn3"></button>
-            <button (click)="selectValue(4)" class="btn4"></button>
-            <button (click)="selectValue(5)" class="btn5"></button>
+        <li *ngFor="let obstacle of listeObstacles; index as i" (click)="selectValue(i)">
+          {{ i }}: {{ obstacle.name }} 
+          {{ obstacle.appearance}}
         </li>
-    </ul>
+      </ul>
 </div>

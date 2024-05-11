@@ -3,11 +3,7 @@ const logger = require('../logger');
 console.log('test4');
 
 exports.createLevel = (req, res) => {
-    if(!req.isAdmin){
-        logger.error({ message: 'Création de level non autorisée'});
-        res.status(403).json({ "message": "UNAUTHORIZED" });
-        return;
-    }
+
     let level = new Level({
         name: req.body.name,
         creator: req.body.creator,
