@@ -16,7 +16,9 @@
         *ngFor="let cell of row; let j = index"
         (click)="changeCellValues(i, j)"
         [style.background-color]="cellColors[i][j]"
-      ></div>
+      >
+        
+    </div>
     </div>
   </div>
   <button (click)="resetGrid()">Reset</button>

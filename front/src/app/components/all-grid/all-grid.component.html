@@ -1,0 +1,7 @@
+<div>
+    <ul>
+        <li *ngFor="let grid of grids; index as i" (click)="selectGrid(grid.composition)">
+            {{ i }}: {{ grid.name }}
+        </li>
+    </ul>
+</div>

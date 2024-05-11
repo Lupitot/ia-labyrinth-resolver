@@ -5,6 +5,9 @@ import { CreateGridServiceService } from '../../services/grid/createGrid/create-
 import { HttpHeaders } from '@angular/common/http';
 import { ConnectService } from '../../services/connectGridToSelector/connect.service';
 import { GetObstaclesServiceService } from '../../services/obstacle/getObstacle/get-obstacles-service.service';
+import { SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { ConnectAllGridToGridService } from '../../services/connectAllGridToGrid/connect-all-grid-to-grid.service';
 
 @Component({
   selector: 'grid',
@@ -26,11 +29,35 @@ export class GridComponent {
   constructor(
     private createGridService: CreateGridServiceService,
     private connectService: ConnectService,
-    private allObstacleService: GetObstaclesServiceService
+    private allObstacleService: GetObstaclesServiceService,
+    private connectAllGridToGridService: ConnectAllGridToGridService
   ) {
     this.generateGrid();
     this.loadObstacles();
   }
+
+  // ngOnInit() {
+  //   let importGrid = this.connectAllGridToGridService.getImportGrid();
+  //   if (importGrid) {
+  //     console.log('importGrid', importGrid);
+  //     this.cells = importGrid;
+
+  //     for (let i in this.cells) {
+  //       for (let j in this.cells[i]) {
+  //         for (let k in this.listeObstacles) {
+  //           console.log("je passe ici")
+  //           console.log("listeObstacles[k]", this.listeObstacles[k])
+  //           console.log('k', k);
+  //           if (parseInt(k) === this.cells[i][j]) {
+  //             console.log('this.cells[i][j]', this.cells[i][j]);
+  //             console.log('this.listeObstacles[k]', this.listeObstacles[k]);
+  //             this.cellColors[i][j] = this.listeObstacles[k].appearance;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   generateGrid() {
     for (let i = 0; i < 10; i++) {
@@ -63,9 +90,10 @@ export class GridComponent {
     if (this.currentValue === this.cells[rowIndex][colIndex] && count >= max) {
       this.cells[rowIndex][colIndex] = 0;
       this.cellColors[rowIndex][colIndex] = '#f5f5f5';
-    }
-    else if (count >= max) {
-      alert('Vous ne pouvez pas ajouter cette valeur car le maximum a déjà été atteint');
+    } else if (count >= max) {
+      alert(
+        'Vous ne pouvez pas ajouter cette valeur car le maximum a déjà été atteint'
+      );
     }
     // sinon mettre a jour la cellule avec this.currentValue
     else if (count < max) {
@@ -117,9 +145,32 @@ export class GridComponent {
     this.allObstacleService.getAllObstacle().subscribe((obstacles) => {
       this.listeObstacles = obstacles;
       console.log(this.listeObstacles);
+      this.initializeGrid();
     });
   }
 
+  initializeGrid() {
+    let importGrid = this.connectAllGridToGridService.getImportGrid();
+    if (importGrid) {
+      console.log('importGrid', importGrid);
+      this.cells = importGrid;
+
+      for (let i in this.cells) {
+        for (let j in this.cells[i]) {
+          for (let k in this.listeObstacles) {
+            console.log("je passe ici")
+            console.log("listeObstacles[k]", this.listeObstacles[k])
+            console.log('k', k);
+            if (parseInt(k) === this.cells[i][j]) {
+              console.log('this.cells[i][j]', this.cells[i][j]);
+              console.log('this.listeObstacles[k]', this.listeObstacles[k]);
+              this.cellColors[i][j] = this.listeObstacles[k].appearance;
+            }
+          }
+        }
+      }
+    }
+  }
   validateGrid(grid: any) {
     const obstacles = this.listeObstacles;
     let valueReturn = true;
@@ -128,14 +179,16 @@ export class GridComponent {
       let obstacleCount = 0;
       for (let i = 0; i < grid.composition.length; i++) {
         for (let j = 0; j < grid.composition[i].length; j++) {
-          if (parseInt(grid.composition[i][j])=== parseInt(k)) {
+          if (parseInt(grid.composition[i][j]) === parseInt(k)) {
             obstacleCount++;
           }
         }
       }
 
       if (obstacleCount < minObstacle) {
-        alert( "L'obstacle " + obstacles[k].name + " n'apparaît pas assez de fois");
+        alert(
+          "L'obstacle " + obstacles[k].name + " n'apparaît pas assez de fois"
+        );
         valueReturn = false;
         break;
       }
