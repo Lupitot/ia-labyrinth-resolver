@@ -1,11 +1,15 @@
-<div>
+<div class="contentSelector">
     <h2>
-        {{currentValue}}
+      {{ currentName }} 
     </h2>
-    <ul>
-        <li *ngFor="let obstacle of listeObstacles; index as i" (click)="selectValue(i)">
-          {{ i }}: {{ obstacle.name }} 
-          {{ obstacle.appearance}}
+    <ul class="listeObstacles">
+        <li *ngFor="let obstacle of listeObstacles; index as i" (click)="selectValue(i, obstacle.name)" >
+          <span [style.background-color]="obstacle.appearance" class="color">
+
+          </span>
+          <span class="name">
+            {{ obstacle.name }} 
+          </span>
         </li>
       </ul>
 </div>

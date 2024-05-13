@@ -36,28 +36,6 @@ export class GridComponent {
     this.loadObstacles();
   }
 
-  // ngOnInit() {
-  //   let importGrid = this.connectAllGridToGridService.getImportGrid();
-  //   if (importGrid) {
-  //     console.log('importGrid', importGrid);
-  //     this.cells = importGrid;
-
-  //     for (let i in this.cells) {
-  //       for (let j in this.cells[i]) {
-  //         for (let k in this.listeObstacles) {
-  //           console.log("je passe ici")
-  //           console.log("listeObstacles[k]", this.listeObstacles[k])
-  //           console.log('k', k);
-  //           if (parseInt(k) === this.cells[i][j]) {
-  //             console.log('this.cells[i][j]', this.cells[i][j]);
-  //             console.log('this.listeObstacles[k]', this.listeObstacles[k]);
-  //             this.cellColors[i][j] = this.listeObstacles[k].appearance;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
 
   generateGrid() {
     for (let i = 0; i < 10; i++) {
@@ -150,21 +128,16 @@ export class GridComponent {
   }
 
   initializeGrid() {
-    let importGrid = this.connectAllGridToGridService.getImportGrid();
+    let importGrid = this.connectAllGridToGridService.getImportGrid(); //récupérer la grille importer
     if (importGrid) {
       console.log('importGrid', importGrid);
-      this.cells = importGrid;
+      this.cells = importGrid; //definir la grille vide avec la grille importer
 
       for (let i in this.cells) {
         for (let j in this.cells[i]) {
           for (let k in this.listeObstacles) {
-            console.log("je passe ici")
-            console.log("listeObstacles[k]", this.listeObstacles[k])
-            console.log('k', k);
-            if (parseInt(k) === this.cells[i][j]) {
-              console.log('this.cells[i][j]', this.cells[i][j]);
-              console.log('this.listeObstacles[k]', this.listeObstacles[k]);
-              this.cellColors[i][j] = this.listeObstacles[k].appearance;
+            if (parseInt(k) === this.cells[i][j]) { //si la cellule est un obstacle
+              this.cellColors[i][j] = this.listeObstacles[k].appearance; //mettre la couleur de l'obstacle
             }
           }
         }
@@ -174,18 +147,18 @@ export class GridComponent {
   validateGrid(grid: any) {
     const obstacles = this.listeObstacles;
     let valueReturn = true;
-    for (let k in obstacles) {
-      let minObstacle = obstacles[k].min;
-      let obstacleCount = 0;
-      for (let i = 0; i < grid.composition.length; i++) {
+    for (let k in obstacles) { //pour chaque obstacle
+      let minObstacle = obstacles[k].min; //récupérer le nombre minimum d'obstacle
+      let obstacleCount = 0; 
+      for (let i = 0; i < grid.composition.length; i++) { 
         for (let j = 0; j < grid.composition[i].length; j++) {
-          if (parseInt(grid.composition[i][j]) === parseInt(k)) {
-            obstacleCount++;
+          if (parseInt(grid.composition[i][j]) === parseInt(k)) { //si la cellule est un obstacle
+            obstacleCount++;  //incrémenter le nombre d'obstacle
           }
         }
       }
 
-      if (obstacleCount < minObstacle) {
+      if (obstacleCount < minObstacle) { //si le nombre d'obstacle est inférieur au nombre minimum d'obstacle
         alert(
           "L'obstacle " + obstacles[k].name + " n'apparaît pas assez de fois"
         );

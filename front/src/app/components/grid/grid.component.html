@@ -1,13 +1,14 @@
-<section>
-  <form (submit)="submitForm()">
+<section class="contentAllGrid">
+  <form (submit)="submitForm()" class="form">
     <input
+      class="inputName"
       type="text"
       placeholder="name"
       [(ngModel)]="name"
       name="name"
       required
     />
-    <button type="submit">Submit</button>
+    <button class="btnSubmit" type="submit">Submit</button>
   </form>
   <div class="grid">
     <div class="row" *ngFor="let row of cells; let i = index">
@@ -16,9 +17,7 @@
         *ngFor="let cell of row; let j = index"
         (click)="changeCellValues(i, j)"
         [style.background-color]="cellColors[i][j]"
-      >
-        
-    </div>
+      ></div>
     </div>
   </div>
   <button (click)="resetGrid()">Reset</button>

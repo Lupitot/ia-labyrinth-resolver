@@ -16,14 +16,16 @@ export class ValueSelctorComponent {
   constructor(private allObstacleService: GetObstaclesServiceService, private connectService : ConnectService ) {}
 
   currentValue = 0;
+  currentName = '';
 
   listeObstacles: any;
   selectedObstacle: any;
 
-  selectValue(value: number) {
+  selectValue(value: number, name: string) {
     console.log(value);
     this.selectedObstacle = this.listeObstacles[value]; //récupérer l'obstacle selectionné
     this.currentValue = value;
+    this.currentName = name;
     if (this.currentValue != null && this.currentValue >= 0) { //si la valeur est supérieur ou égale à 0
       console.log('currentValueAVANTEMIT', this.currentValue);
       this.selelctedValue.emit(this.currentValue); //emettre la valeur selectionné
