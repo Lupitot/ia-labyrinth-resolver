@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { GetAllGridService } from '../../services/grid/getAllGrid/get-all-grid.service';
 import { NgFor } from '@angular/common';
 import { Router } from '@angular/router';
