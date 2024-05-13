@@ -2,6 +2,11 @@ const Obstacle = require('../models/obstacles');
 const logger = require('../logger');
 console.log('test4');
 exports.createObstacle = (req, res) => {
+    if(!req.isAdmin){
+        logger.error({ message: 'Création d obstacle non autorisée'});
+        res.status(403).json({ "message": "UNAUTHORIZED" });
+        return;
+    }
     let obstacles = new Obstacle({
         name: req.body.name,
         traversable: req.body.traversable,
@@ -11,12 +16,11 @@ exports.createObstacle = (req, res) => {
         max: req.body.max,
         creationDate: new Date(),
         modificationDate: new Date(),
-        creationUser: 'admin',
-        modificationUser: 'admin',
         active: true
     });
-
+    console.log(obstacles);
     obstacles.save().then((savedObstacles) => {
+        console.log(savedObstacles);
         res.status(200).json({ "message": "Création d'un obstacl bien réalisée", "obstacle": savedObstacles });
         logger.info({ message: savedObstacles.name + ' bien créé'});
     }).catch((err) => {

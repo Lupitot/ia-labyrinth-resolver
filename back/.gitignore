@@ -1,6 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 /config.js
+/info.log
+/error.log
+/debug.log
 
 # Compiled output
 /dist

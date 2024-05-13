@@ -7,7 +7,6 @@ const DB = require('./config').DB;
 const app = express();
 app.use(compression());
 
-
 // Passby CORS errors
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');

@@ -6,25 +6,25 @@ const jwt = require('jsonwebtoken');
 
 
 exports.createUser = (req, res) => {
-    console.log(req.body);
+    console.log("l'utilisateur est crée ?",req.body);
     bcrypt.hash(req.body.password, 10)
         .then((hash) => {
             let user = new User({
                 name: req.body.name,
                 email: req.body.email,
                 password: hash,
-                
+                status : "user",
                 creationDate: new Date(),
                 modificationDate: new Date(),
-                creationUser: 'admin',  
-                modificationUser: 'admin',
                 active: true
             });
 
 
             user.save().then((savedUser) => {
                 if(savedUser){
-                    const token = jwt.sign({ user: user }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' });
+                    const token = jwt.sign({id: user.id, user: user }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' });
+                    console.log("id user apres creation token", user.id, "l'autre possible id", user._id)
+                    console.log("token", token)
                     res.status(200).json({ message: "Création de User bien réalisée", user: savedUser, token: token, email: user.email, name: user.name, idUser: user._id});
                 }
             }).catch((err) => {
@@ -41,7 +41,9 @@ exports.login = (req, res) => {
             bcrypt.compare(req.body.password, user.password)
                 .then((valid) => {
                     if (valid) {
-                        const token = jwt.sign({ user: user }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' });
+                        const token = jwt.sign({id: user.id, user: user }, 'RANDOM_TOKEN_SECRET', { expiresIn: '24h' });
+                        console.log("id user apres creation token du login", user.id)
+                        console.log("token", token)
                         res.status(200).json({ token: token, email: user.email, name: user.name, idUser: user._id});
                     } else {
                         res.status(401).json({ "message": "Bad credentials" });
