@@ -5,9 +5,8 @@ import { CreateGridServiceService } from '../../services/grid/createGrid/create-
 import { HttpHeaders } from '@angular/common/http';
 import { ConnectService } from '../../services/connectGridToSelector/connect.service';
 import { GetObstaclesServiceService } from '../../services/obstacle/getObstacle/get-obstacles-service.service';
-import { SimpleChanges } from '@angular/core';
-import { ChangeDetectorRef } from '@angular/core';
 import { ConnectAllGridToGridService } from '../../services/connectAllGridToGrid/connect-all-grid-to-grid.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'grid',
@@ -30,7 +29,8 @@ export class GridComponent {
     private createGridService: CreateGridServiceService,
     private connectService: ConnectService,
     private allObstacleService: GetObstaclesServiceService,
-    private connectAllGridToGridService: ConnectAllGridToGridService
+    private connectAllGridToGridService: ConnectAllGridToGridService,
+    private router: Router
   ) {
     this.generateGrid();
     this.loadObstacles();
@@ -90,6 +90,7 @@ export class GridComponent {
     console.log('grid dans submitForm', grid);
     if (this.validateGrid(grid)) {
       this.createGrid(grid);
+      this.router.navigate(['/all-grid']);
     } else {
       console.log('Invalid grid');
     }

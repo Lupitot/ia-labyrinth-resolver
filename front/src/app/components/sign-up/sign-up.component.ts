@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { SignUpServiceService } from '../../services/signUp/sign-up-service.service';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
-import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sign-up',
   standalone: true,
   imports: [
     FormsModule,
-    RouterOutlet, RouterLink, RouterModule
+    RouterOutlet, RouterModule
   ],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
@@ -20,7 +20,7 @@ export class SignUpComponent {
   email!: string;
   password!: string;
 
-  constructor(private signUpService: SignUpServiceService) {}
+  constructor(private signUpService: SignUpServiceService, private router:Router) {}
 
   submitForm() {
     const user = {
@@ -36,6 +36,10 @@ export class SignUpComponent {
       console.log(response);
     });
   }
+
+  redirectLogin() {
+    this.router.navigate(['/login']);
+  }
 }
 
-//http://localhost:3000/api/level/post
+

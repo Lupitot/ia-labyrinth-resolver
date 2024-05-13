@@ -60,4 +60,9 @@ export class LoginComponent {
       }
     );
   }
+
+  redirectSignUp() {
+    this.router.navigate(['/sign-up']);
+  }
+
 }
