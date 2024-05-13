@@ -37,8 +37,3 @@
    transform: translateY(8px);
    transition: ease-in-out 0.3s;
 }
-
-.navbar ul li a {
-    text-decoration: none;
-    color: var(--color-1);
-}

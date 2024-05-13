@@ -1,7 +1,8 @@
-<div>
+<section class="contentAllGrid">
     <ul>
         <li *ngFor="let grid of grids; index as i" (click)="selectGrid(grid.composition)">
-            {{ i }}: {{ grid.name }}
+            <span> Name : {{ grid.name }}</span>
+            <span> Creator : {{ grid.creator }}</span>
         </li>
     </ul>
-</div>
+</section>
