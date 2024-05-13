@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 
@@ -26,7 +27,7 @@ export class LoginComponent {
 
   
 
-  constructor(private loginService: LoginServiceService) {}
+  constructor(private loginService: LoginServiceService, private router: Router ) {}
 
   
 
@@ -37,6 +38,7 @@ export class LoginComponent {
       password: this.password,
     };
     this.login(user);
+    this.router.navigate(['/all-grid']);
   }
 
 
