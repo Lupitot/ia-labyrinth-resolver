@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { CellComponent } from '../cell/cell.component';
 import { LabyrinthResolver } from './labyrinthResolver';
 import { NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -81,7 +80,8 @@ export class GridComponent {
     }
     // sinon mettre a jour la cellule avec this.currentValue
     else if (count < max) {
-      this.cells[rowIndex][colIndex] = this.currentValue; //mettre la valeur de la cellule
+      this.cells[rowIndex][colIndex] = this.currentValue; 
+      console.log(this.cells + " chnge")//mettre la valeur de la cellule
       this.cellColors[rowIndex][colIndex] = appearance; //mettre la couleur de la cellule
     }
   }
@@ -176,32 +176,50 @@ export class GridComponent {
     return valueReturn;
   }
 
-  convertGridtoNumberTab(grid : any) : number[] {
+  convertDoubleGridtoSimpleGrid(grid : number[][]) : number[] {
     let gridFinal : number[] = []
-    const obstacles = this.listeObstacles;
-    let valueReturn = true;
-    for (let k in obstacles) {
-      let minObstacle = obstacles[k].min; 
-      let obstacleCount = 0; 
-      for (let i = 0; i < grid.composition.length; i++) { 
-        for (let j = 0; j < grid.composition[i].length; j++) {
-          if (parseInt(grid.composition[i][j]) === parseInt(k)) { 
-            gridFinal.push(parseInt(k)) 
-          }
-        }
+      for (let i = 0; i < grid.length; i++) { 
+        for (let j = 0; j < grid[i].length; j++) { 
+            gridFinal.push(grid[i][j])
       }
     }
   return gridFinal
 }
+
+//  convertSimpleGridToDoubleGrid(grid : number[],gridSize : number) : number[][] {
+//   let doubleGrid : number[][] = []
+//   let x = 0
+//   for (let i = 0; i < grid.length; i++) {
+//     if (i%gridSize == 0) {
+//       x++
+//     }
+//     doubleGrid[x][i%gridSize] = grid[i]
+//   }
+//   return doubleGrid
+// }
 
   resetGrid() {
     this.generateGrid();
   }
 
   resolveLabyrinth() {
-    const path = LabyrinthResolver.resolveLabyrinth(this.convertGridtoNumberTab(this.cells), this.gridSize)
+    const path = LabyrinthResolver.resolveLabyrinth(this.convertDoubleGridtoSimpleGrid(this.cells), this.gridSize)
+    // const doublepath = this.convertSimpleGridToDoubleGrid(path,10)
     path.forEach(cell => {
-      this.changeCellValues(cell, 6)
+
+      this.showIAPath((cell-cell%this.gridSize)/10,cell%this.gridSize)
     });
   }
+
+  showIAPath(row : number, col : number) {
+    this.connectService.setColor("#09B274");
+    const color = this.connectService.getColor();
+    console.log(row + " row " + col + " col")
+    console.log(this.cells[row][col] + " celllll")
+    
+    this.cells[row][col] = 6; //mettre la valeur de la cellule
+    console.log(this.cells + " iu")
+     this.cellColors[row][col] = color;
+  }
+
 }

@@ -22,17 +22,12 @@ export class ValueSelctorComponent {
   selectedObstacle: any;
 
   selectValue(value: number, name: string) {
-    console.log(value);
     this.selectedObstacle = this.listeObstacles[value]; //récupérer l'obstacle selectionné
     this.currentValue = value;
     this.currentName = name;
     if (this.currentValue != null && this.currentValue >= 0) { //si la valeur est supérieur ou égale à 0
-      console.log('currentValueAVANTEMIT', this.currentValue);
       this.selelctedValue.emit(this.currentValue); //emettre la valeur selectionné
-      console.log('currentValueAPRESEMIT', this.currentValue);
       this.changeAppearance(this.selectedObstacle.appearance); //changer l'apparence de la cellule
-      console.log('max', this.selectedObstacle.max);
-      console.log('min', this.selectedObstacle.min);
       this.changeMax(this.selectedObstacle.max); //changer la valeur max de la cellule
       this.changeMin(this.selectedObstacle.min); //changer la valeur min de la cellule
     }

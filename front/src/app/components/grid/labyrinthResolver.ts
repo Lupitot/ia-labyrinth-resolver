@@ -9,8 +9,9 @@ export class LabyrinthResolver {
     let came_from: IDictionary<number>[] = []
     let cost: IDictionary<number>[] = []
     let newCost: number = 0
-    const entryCell: number = grid.findIndex(cell => cell == 1);
+    const entryCell: number = grid.findIndex(cell => cell == 2);
     const finalCell: number = grid.findIndex(cell => cell == 5);
+    console.log(entryCell +  " entry")
     
     if (this.canMoveRight(grid, entryCell, gridSize)) {
       cellsToExplore.push(entryCell+1)
@@ -25,13 +26,21 @@ export class LabyrinthResolver {
       came_from.push({[entryCell-gridSize]:entryCell})
     }
     if (this.canMoveDown(grid, entryCell, gridSize)) {
-      cellsToExplore.push(entryCell+gridSize)
+      cellsToExplore.push(entryCell+gridSize)  
       came_from.push({[entryCell+gridSize]:entryCell})
     }
+    
     cost.push({[entryCell]:1})
-    let currentCell = -1;
+    let currentCell = entryCell;
     const finalCoord = this.cellToCoordinates(finalCell, gridSize)
     while (cellsToExplore.length != 0){
+      //console.log(currentCell + " current cell " + cellsToExplore + " explore " +  came_from[came_from.findIndex(obj => obj[10])][10])
+      // if (currentCell == 1){
+      //   cellsToExplore.push(2)
+      //   came_from.push({[2]:1})
+      //   currentCell++
+      //   continue;
+      // }
       let coordCurrentCell = this.cellToCoordinates(currentCell,gridSize)
       let XToGo = finalCoord.x - coordCurrentCell.x
       let YToGo = finalCoord.y - coordCurrentCell.y
@@ -40,13 +49,11 @@ export class LabyrinthResolver {
         cellsToExplore.sort((a,b)=> (a-came_from[came_from.findIndex(obj => obj[a])][a])- (b-came_from[came_from.findIndex(obj => obj[b])][b]))
       else
         cellsToExplore.sort((a,b)=> (b-came_from[came_from.findIndex(obj => obj[b])][b])-(a-came_from[came_from.findIndex(obj => obj[a])][a]))
-
       cellsToExplore.sort((a,b) => cost[cost.findIndex(obj=>obj[came_from[came_from.findIndex(obj => obj[a])][a]])][came_from[came_from.findIndex(obj => obj[a])][a]]-cost[cost.findIndex(obj=>obj[came_from[came_from.findIndex(obj => obj[b])][b]])][came_from[came_from.findIndex(obj => obj[b])][b]] )
       currentCell = cellsToExplore[0];
       if (currentCell == finalCell)
         break;
       cellsToExplore = cellsToExplore.filter(cell => cell !== cellsToExplore[0])
-      console.log(this.cellCost(grid,currentCell))
       newCost =  cost[cost.findIndex(obj => obj[came_from[came_from.findIndex(obj => obj[currentCell])][currentCell]])][came_from[came_from.findIndex(obj => obj[currentCell])][currentCell]]+ this.cellCost(grid,currentCell)
       if (cost.findIndex(obj=> obj[currentCell]) != -1 && newCost >= cost[cost.findIndex(obj=> obj[currentCell])][currentCell])
         continue;        
@@ -85,14 +92,8 @@ export class LabyrinthResolver {
 
   static cellCost(grid: number[], cell : number) : number {
     switch(grid[cell]) {
-      case 2: { 
-        return 2
-     } 
-     case 3: { 
-      return 100
-   } 
     case 4: { 
-      return 1000
+      return 20
   } 
       default: { 
         return 1; 
@@ -101,25 +102,25 @@ export class LabyrinthResolver {
   }
 
   static canMoveRight(grid: number[], cell : number, gridSize:number) : boolean {
-    if (cell%gridSize != gridSize-1 && grid[cell+1] != 4) {
+    if (cell%gridSize != gridSize-1 && grid[cell+1] != 1 && grid[cell+1] != 3) {
       return true;
     }
     return false
   }
   static canMoveLeft(grid: number[], cell : number, gridSize:number) : boolean {
-    if ( cell%gridSize != 0 && grid[cell-1] != 4) {
+    if ( cell%gridSize != 0 && grid[cell-1] != 1 && grid[cell-1] != 3) {
       return true;
     }
     return false
   }
   static canMoveUp(grid: number[], cell : number, gridSize:number) : boolean {
-    if (cell >= gridSize && grid[cell-gridSize] != 4) {
+    if (cell >= gridSize && grid[cell-gridSize] != 1 && grid[cell-gridSize] != 3) {
       return true;
     }
     return false
   }
   static canMoveDown(grid: number[], cell : number, gridSize:number) : boolean {
-    if (cell < gridSize*gridSize-gridSize && grid[cell+gridSize] != 4 ) {
+    if (cell < gridSize*gridSize-gridSize && grid[cell+gridSize] != 1 &&grid[cell+gridSize] != 3) {
       return true;
     }
     return false
