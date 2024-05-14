@@ -12,6 +12,7 @@ export class LabyrinthResolver {
     const entryCell: number = grid.findIndex(cell => cell == 2);
     const finalCell: number = grid.findIndex(cell => cell == 5);
     
+    // Append cells that are next to the entry cell in the exploration array
     if (this.canMoveRight(grid, entryCell, gridSize)) {
       cellsToExplore.push(entryCell+1)
       came_from.push({[entryCell+1]:entryCell==0 ? 1 : entryCell})
@@ -32,6 +33,8 @@ export class LabyrinthResolver {
     cost.push({[entryCell]:1})
     let currentCell = entryCell;
     const finalCoord = this.cellToCoordinates(finalCell, gridSize)
+
+    //As long as we wont have found the final point or discover the entire grid, we'll search in every exploration cell
     while (cellsToExplore.length != 0){
       let coordCurrentCell = this.cellToCoordinates(currentCell,gridSize)
       if (finalCoord.x > coordCurrentCell.x && currentCell<10){
@@ -41,7 +44,7 @@ export class LabyrinthResolver {
         cost.push({1:1})
         cost.push({10:1})
       }
-      
+      //Set a priority on which direction the ia should search first
       let XToGo = finalCoord.x - coordCurrentCell.x
       let YToGo = finalCoord.y - coordCurrentCell.y
       let shouldMoveX = Math.abs(XToGo) > Math.abs(YToGo)
@@ -49,15 +52,17 @@ export class LabyrinthResolver {
         cellsToExplore.sort((a,b)=> (a-came_from[came_from.findIndex(obj => obj[a])][a])- (b-came_from[came_from.findIndex(obj => obj[b])][b]))
       else
         cellsToExplore.sort((a,b)=> (b-came_from[came_from.findIndex(obj => obj[b])][b])-(a-came_from[came_from.findIndex(obj => obj[a])][a]))
+
+      // Prioritise cells that cost less to go through
       cellsToExplore.sort((a,b) => cost[cost.findIndex(obj=>obj[came_from[came_from.findIndex(obj => obj[a])][a]])][came_from[came_from.findIndex(obj => obj[a])][a]]-cost[cost.findIndex(obj=>obj[came_from[came_from.findIndex(obj => obj[b])][b]])][came_from[came_from.findIndex(obj => obj[b])][b]] )
       currentCell = cellsToExplore[0];
       if (currentCell == finalCell)
         break;
       cellsToExplore = cellsToExplore.filter(cell => cell !== cellsToExplore[0])
       let costBefore = cost[cost.findIndex(obj => obj[came_from[came_from.findIndex(obj => obj[currentCell])][currentCell]])][came_from[came_from.findIndex(obj => obj[currentCell])][currentCell]]
+      //calculate the cost of the cell we'll go through
       newCost = costBefore + this.cellCost(grid,currentCell)
       if (cost.findIndex(obj=> obj[currentCell]) != -1 && newCost >= costBefore && currentCell != 1){
-        console.log(cost.findIndex(obj=> obj[currentCell]) != -1)
         continue;
       }
               
@@ -67,6 +72,8 @@ export class LabyrinthResolver {
         }
       if (cost.findIndex(obj=> obj[currentCell]) != -1 && newCost < cost[cost.findIndex(obj=> obj[currentCell])][currentCell])
          cost[cost.findIndex(obj=> obj[currentCell])][currentCell] = newCost
+
+      //Append cells that are next to the entry cell in the exploration array
       if (this.canMoveRight(grid, currentCell, gridSize)) {
         cellsToExplore.push(currentCell+1)
         came_from.push({[currentCell+1]:currentCell})
@@ -84,7 +91,7 @@ export class LabyrinthResolver {
         came_from.push({[currentCell+gridSize]:currentCell})
       }
     }
-    
+    //permits to retrieve the way the we went from the end point to the entry point
     let pathCell = finalCell
     while (pathCell != entryCell) 
       {
@@ -97,7 +104,7 @@ export class LabyrinthResolver {
       path.pop()
     return path
   }
-
+// set the costs of differents obstacles
   static cellCost(grid: number[], cell : number) : number {
     switch(grid[cell]) {
     case 4: { 
