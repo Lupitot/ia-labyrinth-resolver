@@ -214,11 +214,7 @@ export class GridComponent {
   showIAPath(row : number, col : number) {
     this.connectService.setColor("#09B274");
     const color = this.connectService.getColor();
-    console.log(row + " row " + col + " col")
-    console.log(this.cells[row][col] + " celllll")
-    
     this.cells[row][col] = 6; //mettre la valeur de la cellule
-    console.log(this.cells + " iu")
      this.cellColors[row][col] = color;
   }
 
