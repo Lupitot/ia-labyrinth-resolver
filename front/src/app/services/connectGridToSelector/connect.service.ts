@@ -10,11 +10,9 @@ export class ConnectService {
 
   setColor(color: string) { //changer la couleur courante de la cellule
     this.appearance = color;
-    console.log("set",this.appearance);
   }
 
   getColor() { //récupérer la couleur courante de la cellule
-    console.log("get",this.appearance);
     return this.appearance;
   }
 

@@ -52,7 +52,6 @@ export class ValueSelctorComponent {
   loadObstacles() {
     this.allObstacleService.getAllObstacle().subscribe((obstacles) => {
       this.listeObstacles = obstacles;
-      console.log(this.listeObstacles);
     });
   }
 }

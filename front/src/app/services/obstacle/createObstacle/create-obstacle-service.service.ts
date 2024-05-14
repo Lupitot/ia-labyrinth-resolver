@@ -10,7 +10,6 @@ export class CreateObstacleServiceService {
 
 
   createObstacle(obstacle: any, httpOptions: any) {
-    console.log('juste avant la requette dans le service', obstacle);
     return this.http.post(
       'http://localhost:3000/api/obstacles/post',
       obstacle,

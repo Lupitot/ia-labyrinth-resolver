@@ -33,7 +33,7 @@ export class SignUpComponent {
 
   createUser(user: any) {
     this.signUpService.createUser(user).subscribe((response) => {
-      console.log(response);
+
     });
   }
 

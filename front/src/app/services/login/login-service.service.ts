@@ -11,7 +11,6 @@ export class LoginServiceService {
   //http://localhost:3000/api/users/login
 
   login(user: any) {
-    console.log(user);
     return this.http.post('http://localhost:3000/api/users/login', user);
   }
 }

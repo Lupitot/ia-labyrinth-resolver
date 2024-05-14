@@ -27,13 +27,11 @@ export class AllGridComponent {
   loadGrids() {
     this.allGridService.getAllGrid().subscribe((grids) => {
       this.grids = grids;
-      console.log(this.grids);
     });
   }
 
   selectGrid(grid: number[][]) {
     this.connectAllGridToGridService.setImportGrid(grid);
-    console.log(grid);
     this.router.navigate(['/Grid']);
   }
 }

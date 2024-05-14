@@ -36,7 +36,6 @@ export class LoginComponent {
   login(user: any) {
     this.loginService.login(user).subscribe(
       (response: any) => {
-        console.log('la reponse', response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('name', response.name);
         let token = localStorage.getItem('token');

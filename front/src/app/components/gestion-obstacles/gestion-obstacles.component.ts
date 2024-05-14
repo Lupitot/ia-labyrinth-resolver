@@ -40,7 +40,6 @@ export class GestionObstaclesComponent {
       min: this.min,
       max: this.max,
     };
-    console.log(obstacle);
     this.createObstacle(obstacle);
   }
 
@@ -69,7 +68,6 @@ export class GestionObstaclesComponent {
   loadObstacles() {
     this.allObstacleService.getAllObstacle().subscribe(obstacles => { //récupérer tous les obstacles
       this.allObstacles = obstacles;
-      console.log("allObstacles", this.allObstacles);
     });
   }
 

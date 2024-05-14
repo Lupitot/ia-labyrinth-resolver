@@ -19,8 +19,6 @@ export class GridPageComponent {
 
 
   currentValueSelected(value: number) {
-    console.log('currentValueSelectedPAGE', value);
     this.currentValue = value;
-    console.log('currentValueSelectedPAGE2', this.currentValue);
   }
 }

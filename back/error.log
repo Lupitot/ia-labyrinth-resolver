@@ -4,3 +4,4 @@
 2024-05-14T09:09:04.167Z : Erreur lors de la vérification du token : JsonWebTokenError: jwt malformed
 2024-05-14T09:22:33.722Z : Erreur lors de la vérification du token : JsonWebTokenError: jwt malformed
 2024-05-14T09:22:56.153Z : Erreur lors de la vérification du token : JsonWebTokenError: jwt malformed
+2024-05-14T14:34:09.606Z : Erreur lors de la recherche de l'utilisateur : MongooseError: Operation `users.findOne()` buffering timed out after 10000ms

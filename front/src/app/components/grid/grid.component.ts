@@ -80,20 +80,17 @@ export class GridComponent {
     }
     // sinon mettre a jour la cellule avec this.currentValue
     else if (count < max) {
-      this.cells[rowIndex][colIndex] = this.currentValue; 
-      console.log(this.cells + " chnge")//mettre la valeur de la cellule
+      this.cells[rowIndex][colIndex] = this.currentValue; //mettre la valeur de la cellule
       this.cellColors[rowIndex][colIndex] = appearance; //mettre la couleur de la cellule
     }
   }
 
   async submitForm() {
-    console.log(localStorage.getItem('token'));
     const grid = {
       name: this.name,
       creator: localStorage.getItem('name'),
       composition: this.cells,
     };
-    console.log('grid dans submitForm', grid);
     if (this.validateGrid(grid)) {
       this.createGrid(grid);
       this.router.navigate(['/all-grid']);
@@ -104,7 +101,6 @@ export class GridComponent {
 
   createGrid(grid: any) {
     const token = localStorage.getItem('token');
-    console.log('grid dans creatGrid', grid);
     if (!token) {
       throw new Error('Token not found');
     }
@@ -114,7 +110,6 @@ export class GridComponent {
         Authorization: 'Bearer ' + token,
       }),
     };
-    console.log('la grid avant la requette', grid);
     this.createGridService.createGrid(grid, httpOptions).subscribe(
       //envoyer la requette de création de la grille
       (response) => {
@@ -129,7 +124,6 @@ export class GridComponent {
   loadObstacles() {
     this.allObstacleService.getAllObstacle().subscribe((obstacles) => {
       this.listeObstacles = obstacles;
-      console.log(this.listeObstacles);
       this.initializeGrid();
     });
   }
@@ -137,7 +131,6 @@ export class GridComponent {
   initializeGrid() {
     let importGrid = this.connectAllGridToGridService.getImportGrid(); //récupérer la grille importer
     if (importGrid) {
-      console.log('importGrid', importGrid);
       this.cells = importGrid; //definir la grille vide avec la grille importer
 
       for (let i in this.cells) {
@@ -187,17 +180,6 @@ export class GridComponent {
   return gridFinal
 }
 
-//  convertSimpleGridToDoubleGrid(grid : number[],gridSize : number) : number[][] {
-//   let doubleGrid : number[][] = []
-//   let x = 0
-//   for (let i = 0; i < grid.length; i++) {
-//     if (i%gridSize == 0) {
-//       x++
-//     }
-//     doubleGrid[x][i%gridSize] = grid[i]
-//   }
-//   return doubleGrid
-// }
 
   resetGrid() {
     this.generateGrid();
@@ -205,7 +187,6 @@ export class GridComponent {
 
   resolveLabyrinth() {
     const path = LabyrinthResolver.resolveLabyrinth(this.convertDoubleGridtoSimpleGrid(this.cells), this.gridSize)
-    // const doublepath = this.convertSimpleGridToDoubleGrid(path,10)
     path.forEach(cell => {
 
       this.showIAPath((cell-cell%this.gridSize)/10,cell%this.gridSize)
@@ -215,7 +196,7 @@ export class GridComponent {
   showIAPath(row : number, col : number) {
     this.connectService.setColor("#09B274");
     const color = this.connectService.getColor();
-    this.cells[row][col] = 6; //mettre la valeur de la cellule
+    this.cells[row][col] = 6; 
      this.cellColors[row][col] = color;
   }
 

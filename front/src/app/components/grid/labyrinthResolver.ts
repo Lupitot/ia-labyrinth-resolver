@@ -58,7 +58,6 @@ export class LabyrinthResolver {
       newCost = costBefore + this.cellCost(grid,currentCell)
       if (cost.findIndex(obj=> obj[currentCell]) != -1 && newCost >= costBefore && currentCell != 1){
         console.log(cost.findIndex(obj=> obj[currentCell]) != -1)
-        console.log(currentCell + " oui ")
         continue;
       }
               
