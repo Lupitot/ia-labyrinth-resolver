@@ -30,13 +30,23 @@ export class LabyrinthResolver {
     }
     cost.push({[entryCell]:1})
     let currentCell = -1;
-
+    const finalCoord = this.cellToCoordinates(finalCell, gridSize)
     while (cellsToExplore.length != 0){
+      let coordCurrentCell = this.cellToCoordinates(currentCell,gridSize)
+      let XToGo = finalCoord.x - coordCurrentCell.x
+      let YToGo = finalCoord.y - coordCurrentCell.y
+      let shouldMoveX = Math.abs(XToGo) > Math.abs(YToGo)
+      if (shouldMoveX)
+        cellsToExplore.sort((a,b)=> (a-came_from[came_from.findIndex(obj => obj[a])][a])- (b-came_from[came_from.findIndex(obj => obj[b])][b]))
+      else
+        cellsToExplore.sort((a,b)=> (b-came_from[came_from.findIndex(obj => obj[b])][b])-(a-came_from[came_from.findIndex(obj => obj[a])][a]))
+
       cellsToExplore.sort((a,b) => cost[cost.findIndex(obj=>obj[came_from[came_from.findIndex(obj => obj[a])][a]])][came_from[came_from.findIndex(obj => obj[a])][a]]-cost[cost.findIndex(obj=>obj[came_from[came_from.findIndex(obj => obj[b])][b]])][came_from[came_from.findIndex(obj => obj[b])][b]] )
       currentCell = cellsToExplore[0];
       if (currentCell == finalCell)
         break;
       cellsToExplore = cellsToExplore.filter(cell => cell !== cellsToExplore[0])
+      console.log(this.cellCost(grid,currentCell))
       newCost =  cost[cost.findIndex(obj => obj[came_from[came_from.findIndex(obj => obj[currentCell])][currentCell]])][came_from[came_from.findIndex(obj => obj[currentCell])][currentCell]]+ this.cellCost(grid,currentCell)
       if (cost.findIndex(obj=> obj[currentCell]) != -1 && newCost >= cost[cost.findIndex(obj=> obj[currentCell])][currentCell])
         continue;        
