@@ -151,6 +151,7 @@ export class GridComponent {
       }
     }
   }
+  
   validateGrid(grid: any) {
     const obstacles = this.listeObstacles;
     let valueReturn = true;

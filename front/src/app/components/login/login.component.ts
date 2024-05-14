@@ -6,30 +6,22 @@ import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 
-
-
-
 @Component({
   selector: 'login',
   standalone: true,
-  imports: [
-    FormsModule,
-    RouterOutlet, RouterLink, RouterModule
-  ],
+  imports: [FormsModule, RouterOutlet, RouterLink, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
 export class LoginComponent {
-
   name!: string;
   email!: string;
   password!: string;
 
-  
-
-  constructor(private loginService: LoginServiceService, private router: Router ) {}
-
-  
+  constructor(
+    private loginService: LoginServiceService,
+    private router: Router
+  ) {}
 
   submitForm() {
     const user = {
@@ -41,16 +33,16 @@ export class LoginComponent {
     this.router.navigate(['/all-grid']);
   }
 
-
   login(user: any) {
     this.loginService.login(user).subscribe(
       (response: any) => {
-        console.log("la reponse", response);
+        console.log('la reponse', response);
         localStorage.setItem('token', response.token);
         localStorage.setItem('name', response.name);
         let token = localStorage.getItem('token');
         if (token) {
           console.log(token);
+          this.redirectGrid();
         } else {
           console.log('No token found');
         }
@@ -65,4 +57,7 @@ export class LoginComponent {
     this.router.navigate(['/sign-up']);
   }
 
+  redirectGrid() {
+    this.router.navigate(['/all-grid']);
+  }
 }
