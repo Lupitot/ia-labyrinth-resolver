@@ -30,6 +30,8 @@ export class CellComponent {
       return 'yellow';
     } else if(index === 5){
       return 'purple';
+    } else if(index === 6) {
+      return 'lime';
     } else {
       return 'white';
     }
