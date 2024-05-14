@@ -1,31 +1,72 @@
-<div>
-    <div class="contentInput">
-        <h1>Create Obstacle</h1>
-        <form (submit)="submitForm()">
-        <input type="text" placeholder="Name" [(ngModel)]="name" name="name" required />
+<div class="contentInput">
+  <h1>Create Obstacle</h1>
+  <form (submit)="submitForm()" class="form">
+    <input
+      type="text"
+      placeholder="Name"
+      [(ngModel)]="name"
+      name="name"
+      required
+    />
 
-        <label for="traversable">Traversable:</label><br>
-        <input type="radio" id="traversable" name="traversable" [(ngModel)]="traversable" value="true">
-        <label for="true">Oui</label><br>
-        <input type="radio" id="traversable" name="traversable" [(ngModel)]="traversable" value="false">
-        <label for="false">Non</label><br>
+    <label for="traversable">Traversable:</label><br />
+    <span class="contentTraversable">
+      <input
+        type="radio"
+        id="traversable"
+        name="traversable"
+        [(ngModel)]="traversable"
+        value="true" />
+      <label for="true">Oui</label><br />
+      <input
+        type="radio"
+        id="traversable"
+        name="traversable"
+        [(ngModel)]="traversable"
+        value="false" />
+      <label for="false">Non</label><br
+    /></span>
 
-        <input type="text" placeholder="effect" [(ngModel)]="effect" name="effect" required />
-        <input type="color" id="appearance" name="appearance" [(ngModel)]="appearance" required>
-        <input type="number" placeholder="0" [(ngModel)]="min" name="min" required />
-        <input type="number" placeholder="0" [(ngModel)]="max" name="max" required />
-        <button type="submit">
-            validé</button>
-        </form>
+    <input
+      type="text"
+      placeholder="effect"
+      [(ngModel)]="effect"
+      name="effect"
+      required
+    />
+    <input
+      type="color"
+      id="appearance"
+      name="appearance"
+      [(ngModel)]="appearance"
+      required
+    />
+    <input
+      type="number"
+      placeholder="0"
+      [(ngModel)]="min"
+      name="min"
+      required
+    />
+    <input
+      type="number"
+      placeholder="0"
+      [(ngModel)]="max"
+      name="max"
+      required
+    />
+    <button type="submit">validé</button>
+  </form>
+</div>
+<div  class="contentObstacle">
+  <div class="allObstacles" *ngFor="let item of allObstacles">
+    <div>
+      <h2>{{ item.name }}</h2>
+      <p>Traversable: {{ item.traversable }}</p>
+      <p>Effect: {{ item.effect }}</p>
+      <p>Appearance: {{ item.appearance }}</p>
+      <p>Min: {{ item.min }}</p>
+      <p>Max: {{ item.max }}</p>
     </div>
-    <div class="allObstacles" *ngFor="let item of allObstacles">
-        <div>
-            <h2>{{item.name}}</h2>
-            <p>Traversable: {{item.traversable}}</p>
-            <p>Effect: {{item.effect}}</p>
-            <p>Appearance: {{item.appearance}}</p>
-            <p>Min: {{item.min}}</p>
-            <p>Max: {{item.max}}</p>
-        </div>
-    </div>
+  </div>
 </div>

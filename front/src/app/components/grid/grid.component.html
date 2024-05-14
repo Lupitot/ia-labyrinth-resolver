@@ -1,28 +1,29 @@
 <section class="contentAllGrid">
-  <form (submit)="submitForm()" class="form">
-    <input
-      class="inputName"
-      type="text"
-      placeholder="name"
-      [(ngModel)]="name"
-      name="name"
-      required
-    />
-    <button class="btnSubmit" type="submit">Submit</button>
-  </form>
-  <div class="grid">
-    <div class="row" *ngFor="let row of cells; let i = index">
-      <div
-        class="cell"
-        *ngFor="let cell of row; let j = index"
-        (click)="changeCellValues(i, j)"
-        [style.background-color]="cellColors[i][j]"
-      ></div>
+  <div class="NameAndGrid">
+    <form (submit)="submitForm()" class="form">
+      <input
+        class="inputName"
+        type="text"
+        placeholder="name"
+        [(ngModel)]="name"
+        name="name"
+        required
+      />
+      <button class="btnSubmit" type="submit">Submit</button>
+    </form>
+    <div class="grid">
+      <div class="row" *ngFor="let row of cells; let i = index">
+        <div
+          class="cell"
+          *ngFor="let cell of row; let j = index"
+          (click)="changeCellValues(i, j)"
+          [style.background-color]="cellColors[i][j]"
+        ></div>
+      </div>
     </div>
-</div>
-<div class="buttons">
+  </div>
+  <div class="buttons">
     <button (click)="resetGrid()">Reset</button>
     <button (click)="resolveLabyrinth()">Resolve</button>
-</div>
+  </div>
 </section>
-  

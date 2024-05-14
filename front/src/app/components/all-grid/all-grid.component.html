@@ -1,4 +1,5 @@
 <section class="contentAllGrid">
+    <h1> All Grids </h1>
     <ul>
         <li *ngFor="let grid of grids; index as i" (click)="selectGrid(grid.composition)">
             <span> Name : {{ grid.name }}</span>
